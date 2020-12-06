@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  APPOS
+
+  Created by 王冠綸 on 2020/11/4.
+  
+*/
+
+"Companies" = "公司";
+
+"Error" = "錯誤";
+
+"Login" = "登入";
+
+"Mail" = "信箱";
+
+"Password" = "密碼";
