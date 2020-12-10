@@ -1,16 +1,16 @@
 //
-//  String+Extension.swift
+//  LocalizedString.swift
 //  APPOS
 //
-//  Created by 王冠綸 on 2020/12/6.
+//  Created by 王冠綸 on 2020/12/10.
 //
 
 import Foundation
 
-extension String {
+struct LocalizedString {
     
-    static var companies: String {
-        NSLocalizedString("Companies", comment: "")
+    static var companyList: String {
+        NSLocalizedString("CompanyList", comment: "")
     }
     
     static var error: String {

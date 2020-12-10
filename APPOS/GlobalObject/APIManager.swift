@@ -110,6 +110,14 @@ private extension APIManager {
 // MARK: - Internal functions
 extension APIManager {
     
+    static func setToken(_ token: String) {
+        self.token = token
+    }
+    
+    static func clearToken() {
+        self.token = nil
+    }
+    
     static func login(mail: String, password: String, completion: @escaping (Result<LoginResult, APIError>) -> Void) {
         let body = """
         {
@@ -118,10 +126,6 @@ extension APIManager {
         }
         """.data(using: .utf8)!
         standardRequest(path: "auth_user", method: .post, body: body, completion: completion)
-    }
-    
-    static func setToken(_ token: String) {
-        self.token = token
     }
     
     static func getCompanies(completion: @escaping (Result<PaginationResult<Company>, APIError>) -> Void) {
