@@ -6,7 +6,21 @@
   
 */
 
+"AdminMail" = "管理員信箱";
+"AdminName" = "管理員名稱";
+"AdminPassword" = "管理員密碼";
+"AdminPhone" = "管理員聯絡電話";
+
+"CompanyAddress" = "公司地址";
 "CompanyList" = "公司列表";
+"CompanyMail" = "公司信箱";
+"CompanyName" = "公司名稱";
+"CompanyOwner" = "公司負責人";
+"CompanyPhone" = "公司聯絡電話";
+"CompanyUID" = "公司識別碼";
+"CreateCompany" = "建立公司";
+
+"Done" = "完成";
 
 "Error" = "錯誤";
 

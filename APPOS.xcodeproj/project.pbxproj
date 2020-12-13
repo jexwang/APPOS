@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6947A0D42584C87B00D76185 /* Alert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6947A0D32584C87B00D76185 /* Alert+Extension.swift */; };
 		6954BF43257CCFB90014C5C3 /* APPOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BF42257CCFB90014C5C3 /* APPOSApp.swift */; };
 		6954BF45257CCFB90014C5C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BF44257CCFB90014C5C3 /* ContentView.swift */; };
 		6954BF47257CCFBB0014C5C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6954BF46257CCFBB0014C5C3 /* Assets.xcassets */; };
@@ -25,6 +26,8 @@
 		6954BFB825826DBA0014C5C3 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BFB725826DBA0014C5C3 /* Log.swift */; };
 		6954BFC7258276900014C5C3 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BFC6258276900014C5C3 /* LocalizedString.swift */; };
 		6954BFD2258277D70014C5C3 /* CompanyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BFD1258277D70014C5C3 /* CompanyListView.swift */; };
+		6954BFD725845A560014C5C3 /* CreateCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BFD625845A560014C5C3 /* CreateCompanyView.swift */; };
+		69A2B5412584661E00485FBE /* Blank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A2B5402584661E00485FBE /* Blank.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6947A0D32584C87B00D76185 /* Alert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Extension.swift"; sourceTree = "<group>"; };
 		6954BF3F257CCFB90014C5C3 /* APPOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APPOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6954BF42257CCFB90014C5C3 /* APPOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APPOSApp.swift; sourceTree = "<group>"; };
 		6954BF44257CCFB90014C5C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 		6954BFB725826DBA0014C5C3 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		6954BFC6258276900014C5C3 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		6954BFD1258277D70014C5C3 /* CompanyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyListView.swift; sourceTree = "<group>"; };
+		6954BFD625845A560014C5C3 /* CreateCompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyView.swift; sourceTree = "<group>"; };
+		69A2B5402584661E00485FBE /* Blank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blank.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				6954BFA2257CD5E60014C5C3 /* AlertItem.swift */,
+				69A2B5402584661E00485FBE /* Blank.swift */,
 				6954BF7A257CD05E0014C5C3 /* Company.swift */,
 				6954BF7B257CD05E0014C5C3 /* ErrorData.swift */,
 				6954BF79257CD05E0014C5C3 /* LoginResult.swift */,
@@ -177,6 +184,7 @@
 			children = (
 				6954BF85257CD09E0014C5C3 /* LoginView.swift */,
 				6954BFD1258277D70014C5C3 /* CompanyListView.swift */,
+				6954BFD625845A560014C5C3 /* CreateCompanyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,6 +192,7 @@
 		6954BF99257CD3E00014C5C3 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6947A0D32584C87B00D76185 /* Alert+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -330,14 +339,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6947A0D42584C87B00D76185 /* Alert+Extension.swift in Sources */,
 				6954BF7F257CD05E0014C5C3 /* ErrorData.swift in Sources */,
 				6954BFC7258276900014C5C3 /* LocalizedString.swift in Sources */,
 				6954BFB025826BB60014C5C3 /* InputField.swift in Sources */,
+				69A2B5412584661E00485FBE /* Blank.swift in Sources */,
 				6954BFB825826DBA0014C5C3 /* Log.swift in Sources */,
 				6954BF7D257CD05E0014C5C3 /* LoginResult.swift in Sources */,
 				6954BFA3257CD5E60014C5C3 /* AlertItem.swift in Sources */,
 				6954BFD2258277D70014C5C3 /* CompanyListView.swift in Sources */,
 				6954BF80257CD05E0014C5C3 /* PaginationResult.swift in Sources */,
+				6954BFD725845A560014C5C3 /* CreateCompanyView.swift in Sources */,
 				6954BF74257CD0470014C5C3 /* APIManager.swift in Sources */,
 				6954BF45257CCFB90014C5C3 /* ContentView.swift in Sources */,
 				6954BF7E257CD05E0014C5C3 /* Company.swift in Sources */,

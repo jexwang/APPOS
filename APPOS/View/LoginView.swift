@@ -13,6 +13,8 @@ struct LoginView: View {
     
     @State var alertItem: AlertItem?
     
+    @State var isLoginSuccess: Bool = false
+    
     var body: some View {
         VStack(spacing: 16) {
             InputField.mail(inputText: $mail)
@@ -29,9 +31,8 @@ struct LoginView: View {
             password = "Passw0rd"
             #endif
         })
-        .alert(item: $alertItem) { (item) -> Alert in
-            Alert(title: item.title, message: item.message, dismissButton: nil)
-        }
+        .alert(item: $alertItem, content: Alert.init)
+        .fullScreenCover(isPresented: $isLoginSuccess, content: CompanyListView.init)
     }
 }
 
@@ -43,7 +44,7 @@ private extension LoginView {
             case .success(let loginResult):
                 log(loginResult)
                 APIManager.setToken(loginResult.appToken)
-//                self?.performSegue(withIdentifier: "ToCompanies", sender: nil)
+                isLoginSuccess = true
             case .failure(let error):
                 log(error.localizedDescription)
                 APIManager.clearToken()

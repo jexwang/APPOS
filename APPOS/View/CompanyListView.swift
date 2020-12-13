@@ -32,12 +32,10 @@ struct CompanyListView: View {
                 }
             }
             .onAppear(perform: loadData)
-            .alert(item: $alertItem) { (item) -> Alert in
-                Alert(title: item.title, message: item.message, dismissButton: nil)
-            }
+            .alert(item: $alertItem, content: Alert.init)
         }
         .sheet(isPresented: $showCreateCompanyView, content: {
-            Text("Create")
+            CreateCompanyView()
         })
     }
 }

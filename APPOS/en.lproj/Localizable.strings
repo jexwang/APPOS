@@ -6,7 +6,21 @@
   
 */
 
+"AdminMail" = "Admin Mail";
+"AdminName" = "Admin Name";
+"AdminPassword" = "Admin Password";
+"AdminPhone" = "Admin Phone";
+
+"CompanyAddress" = "Company Address";
 "CompanyList" = "Company List";
+"CompanyMail" = "Company mail";
+"CompanyName" = "Company Name";
+"CompanyOwner" = "Company Owner";
+"CompanyPhone" = "Compnay Phone";
+"CompanyUID" = "Company UID";
+"CreateCompany" = "Create Company";
+
+"Done" = "Done";
 
 "Error" = "Error";
 

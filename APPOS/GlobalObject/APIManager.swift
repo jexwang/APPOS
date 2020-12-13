@@ -39,6 +39,8 @@ class APIManager {
     
     static let url: URL = URL(string: "http://35.233.166.164/api/v1/")!
     static private(set) var token: String?
+    static private let encoder: JSONEncoder = JSONEncoder()
+    static private let decoder: JSONDecoder = JSONDecoder()
     
 }
 
@@ -73,8 +75,14 @@ private extension APIManager {
         sendRequest(url: urlWithPath, method: method, body: body) { (data, response, error) in
             DispatchQueue.main.async {
                 if let data = data {
-                    if checkHTTPStatusCodeEqual200(response: response) {
-                        completion(parseData(data: data))
+                    if checkHTTPStatusCodeIsSuccess(response: response) {
+                        if data.count == 0 {
+                            // 防止部分成功不回傳資料的狀況
+                            let data = "{}".data(using: .utf8)!
+                            completion(parseData(data: data))
+                        } else {
+                            completion(parseData(data: data))
+                        }
                     } else {
                         let parseResult: Result<ErrorData, APIError> = parseData(data: data)
                         switch parseResult {
@@ -91,14 +99,14 @@ private extension APIManager {
         }
     }
     
-    private static func checkHTTPStatusCodeEqual200(response: URLResponse?) -> Bool {
+    private static func checkHTTPStatusCodeIsSuccess(response: URLResponse?) -> Bool {
         guard let response = response as? HTTPURLResponse else { return false }
-        return response.statusCode == 200
+        return response.statusCode >= 200 && response.statusCode <= 299
     }
     
     private static func parseData<T: Decodable>(data: Data) -> Result<T, APIError> {
         do {
-            let parseResult = try JSONDecoder().decode(T.self, from: data)
+            let parseResult = try decoder.decode(T.self, from: data)
             return .success(parseResult)
         } catch {
             return .failure(.dataFormatError)
@@ -130,6 +138,15 @@ extension APIManager {
     
     static func getCompanies(completion: @escaping (Result<PaginationResult<Company>, APIError>) -> Void) {
         standardRequest(path: "companies", method: .get, body: nil, completion: completion)
+    }
+    
+    static func createCompany(company: CreateCompany, completion: @escaping (Result<Blank, APIError>) -> Void) {
+        do {
+            let companyData = try encoder.encode(company)
+            standardRequest(path: "companies", method: .post, body: companyData, completion: completion)
+        } catch {
+            completion(.failure(.dataFormatError))
+        }
     }
     
     static func searchCompany(id: Int, completion: @escaping (Result<Company, APIError>) -> Void) {
