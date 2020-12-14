@@ -33,6 +33,7 @@ struct InputField: View {
     }
 }
 
+// MARK: - Internal functions
 extension InputField {
     
     static func mail(inputText: Binding<String>) -> InputField {

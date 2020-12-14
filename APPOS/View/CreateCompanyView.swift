@@ -81,6 +81,7 @@ struct CreateCompanyView: View {
     }
 }
 
+// MARK: - Private functions
 private extension CreateCompanyView {
     
     func createCompany() {
