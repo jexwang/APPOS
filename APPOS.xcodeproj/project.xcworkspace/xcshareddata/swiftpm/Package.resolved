@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "JWStatusHUD",
+        "repositoryURL": "https://github.com/jexwang/JWStatusHUD.git",
+        "state": {
+          "branch": null,
+          "revision": "682815f5d0dce1a28eb93c8c74b5013241452315",
+          "version": "0.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
