@@ -22,7 +22,11 @@ struct CreateCompanyView: View {
     @State var adminPhone: String = ""
     
     @State var statusHUDItem: StatusHUDItem?
-    @State var alertItem: AlertItem?
+    @State var alertItem: AlertItem? {
+        didSet {
+            statusHUDItem = nil
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -107,13 +111,11 @@ private extension CreateCompanyView {
             case .success:
                 log(company)
                 
-                statusHUDItem = StatusHUDItem(type: .success, message: LocalizedString.loginSucceed, dismissAfter: 1) {
+                statusHUDItem = StatusHUDItem(type: .success, message: LocalizedString.createSucceed, dismissAfter: 1) {
                     presentationMode.wrappedValue.dismiss()
                 }
             case .failure(let error):
                 log(error.localizedDescription)
-                
-                statusHUDItem = nil
                 alertItem = AlertItem(title: Text(LocalizedString.error), message: Text(error.localizedDescription))
             }
         }

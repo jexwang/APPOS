@@ -59,6 +59,10 @@ struct LocalizedString {
         NSLocalizedString("CreateCompany", comment: "")
     }
     
+    static var createSucceed: String {
+        NSLocalizedString("CreateSucceed", comment: "")
+    }
+    
     
     
     static var done: String {

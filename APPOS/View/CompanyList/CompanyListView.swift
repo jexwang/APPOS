@@ -11,7 +11,11 @@ struct CompanyListView: View {
     @State var companyList: [Company] = []
     
     @State var statusHUDItem: StatusHUDItem?
-    @State var alertItem: AlertItem?
+    @State var alertItem: AlertItem? {
+        didSet {
+            statusHUDItem = nil
+        }
+    }
     @State var showCreateCompanyView: Bool = false
     
     var body: some View {
@@ -37,9 +41,7 @@ struct CompanyListView: View {
         }
         .statusHUD(item: $statusHUDItem)
         .alert(item: $alertItem, content: Alert.init)
-        .sheet(isPresented: $showCreateCompanyView, content: {
-            CreateCompanyView()
-        })
+        .sheet(isPresented: $showCreateCompanyView, content: CreateCompanyView.init)
     }
 }
 
@@ -50,12 +52,11 @@ private extension CompanyListView {
         statusHUDItem = StatusHUDItem(type: .loading, message: LocalizedString.loading)
         
         APIManager.getCompanies { (result) in
-            statusHUDItem = nil
-            
             switch result {
             case .success(let paginationResult):
                 log(paginationResult)
                 self.companyList = paginationResult.result
+                statusHUDItem = nil
             case .failure(let error):
                 log(error.localizedDescription)
                 alertItem = AlertItem(title: Text(LocalizedString.error), message: Text(error.localizedDescription))

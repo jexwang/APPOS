@@ -14,8 +14,8 @@ extension View {
     }
     
     func statusHUD(item: Binding<StatusHUDItem?>) -> some View {
-        if let dismissAfter = item.wrappedValue?.dismissAfter {
-            Timer.scheduledTimer(withTimeInterval: dismissAfter, repeats: false) { (_) in
+        if let dismissTimeInterval = item.wrappedValue?.dismissAfter {
+            Timer.scheduledTimer(withTimeInterval: dismissTimeInterval, repeats: false) { (_) in
                 item.wrappedValue?.completion?()
                 item.wrappedValue = nil
             }

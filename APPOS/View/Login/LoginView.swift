@@ -12,7 +12,11 @@ struct LoginView: View {
     @State var password: String = ""
     
     @State var statusHUDItem: StatusHUDItem?
-    @State var alertItem: AlertItem?
+    @State var alertItem: AlertItem? {
+        didSet {
+            statusHUDItem = nil
+        }
+    }
     @State var isLoginSuccess: Bool = false
     
     var body: some View {
@@ -56,7 +60,6 @@ private extension LoginView {
                 log(error.localizedDescription)
                 APIManager.clearToken()
                 
-                statusHUDItem = nil
                 alertItem = AlertItem(title: Text(LocalizedString.error), message: Text(error.localizedDescription))
             }
         }
