@@ -24,7 +24,9 @@
 
 "Error" = "Error";
 
+"Loading" = "Loading";
 "Login" = "Login";
+"LoginSucceed" = "Login Succeed";
 
 "Mail" = "Mail";
 

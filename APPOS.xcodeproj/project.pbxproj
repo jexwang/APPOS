@@ -27,6 +27,10 @@
 		6954BFC7258276900014C5C3 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BFC6258276900014C5C3 /* LocalizedString.swift */; };
 		6954BFD2258277D70014C5C3 /* CompanyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BFD1258277D70014C5C3 /* CompanyListView.swift */; };
 		6954BFD725845A560014C5C3 /* CreateCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954BFD625845A560014C5C3 /* CreateCompanyView.swift */; };
+		695D1DFC258754330015B886 /* StatusHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D1DFB258754330015B886 /* StatusHUD.swift */; };
+		695D1E0425875D220015B886 /* StatusHUDItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D1E0325875D220015B886 /* StatusHUDItem.swift */; };
+		695D1E0A25875EF20015B886 /* StatusHUDType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695D1E0925875EF20015B886 /* StatusHUDType.swift */; };
+		69A2817A258765F6001FA25C /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A28179258765F6001FA25C /* View+Extension.swift */; };
 		69A2B5412584661E00485FBE /* Blank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A2B5402584661E00485FBE /* Blank.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +79,10 @@
 		6954BFC6258276900014C5C3 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		6954BFD1258277D70014C5C3 /* CompanyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyListView.swift; sourceTree = "<group>"; };
 		6954BFD625845A560014C5C3 /* CreateCompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyView.swift; sourceTree = "<group>"; };
+		695D1DFB258754330015B886 /* StatusHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusHUD.swift; sourceTree = "<group>"; };
+		695D1E0325875D220015B886 /* StatusHUDItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusHUDItem.swift; sourceTree = "<group>"; };
+		695D1E0925875EF20015B886 /* StatusHUDType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusHUDType.swift; sourceTree = "<group>"; };
+		69A28179258765F6001FA25C /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		69A2B5402584661E00485FBE /* Blank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blank.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +141,7 @@
 				6954BF97257CD38D0014C5C3 /* Localizable.strings */,
 				6954BF78257CD0520014C5C3 /* Model */,
 				6954BF84257CD0910014C5C3 /* View */,
+				695D1E0825875ED70015B886 /* StatusHUD */,
 				6954BF99257CD3E00014C5C3 /* Extension */,
 				6954BFBC258276530014C5C3 /* GlobalObject */,
 				6954BF48257CCFBB0014C5C3 /* Preview Content */,
@@ -193,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				6947A0D32584C87B00D76185 /* Alert+Extension.swift */,
+				69A28179258765F6001FA25C /* View+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -206,6 +216,16 @@
 				6954BFB725826DBA0014C5C3 /* Log.swift */,
 			);
 			path = GlobalObject;
+			sourceTree = "<group>";
+		};
+		695D1E0825875ED70015B886 /* StatusHUD */ = {
+			isa = PBXGroup;
+			children = (
+				695D1E0925875EF20015B886 /* StatusHUDType.swift */,
+				695D1DFB258754330015B886 /* StatusHUD.swift */,
+				695D1E0325875D220015B886 /* StatusHUDItem.swift */,
+			);
+			path = StatusHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,11 +361,15 @@
 			files = (
 				6947A0D42584C87B00D76185 /* Alert+Extension.swift in Sources */,
 				6954BF7F257CD05E0014C5C3 /* ErrorData.swift in Sources */,
+				69A2817A258765F6001FA25C /* View+Extension.swift in Sources */,
 				6954BFC7258276900014C5C3 /* LocalizedString.swift in Sources */,
+				695D1E0425875D220015B886 /* StatusHUDItem.swift in Sources */,
 				6954BFB025826BB60014C5C3 /* InputField.swift in Sources */,
+				695D1DFC258754330015B886 /* StatusHUD.swift in Sources */,
 				69A2B5412584661E00485FBE /* Blank.swift in Sources */,
 				6954BFB825826DBA0014C5C3 /* Log.swift in Sources */,
 				6954BF7D257CD05E0014C5C3 /* LoginResult.swift in Sources */,
+				695D1E0A25875EF20015B886 /* StatusHUDType.swift in Sources */,
 				6954BFA3257CD5E60014C5C3 /* AlertItem.swift in Sources */,
 				6954BFD2258277D70014C5C3 /* CompanyListView.swift in Sources */,
 				6954BF80257CD05E0014C5C3 /* PaginationResult.swift in Sources */,
@@ -613,6 +637,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MJG9624G6B;
 				INFOPLIST_FILE = APPOSUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -633,6 +658,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MJG9624G6B;
 				INFOPLIST_FILE = APPOSUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

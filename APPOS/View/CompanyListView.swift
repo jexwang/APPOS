@@ -10,6 +10,7 @@ import SwiftUI
 struct CompanyListView: View {
     @State var companyList: [Company] = []
     
+    @State var statusHUDItem: StatusHUDItem?
     @State var alertItem: AlertItem?
     @State var showCreateCompanyView: Bool = false
     
@@ -32,8 +33,9 @@ struct CompanyListView: View {
                 }
             }
             .onAppear(perform: loadData)
-            .alert(item: $alertItem, content: Alert.init)
         }
+        .statusHUD(item: $statusHUDItem)
+        .alert(item: $alertItem, content: Alert.init)
         .sheet(isPresented: $showCreateCompanyView, content: {
             CreateCompanyView()
         })
@@ -43,7 +45,11 @@ struct CompanyListView: View {
 private extension CompanyListView {
     
     func loadData() {
+        statusHUDItem = StatusHUDItem(type: .loading, message: LocalizedString.loading)
+        
         APIManager.getCompanies { (result) in
+            statusHUDItem = nil
+            
             switch result {
             case .success(let paginationResult):
                 log(paginationResult)

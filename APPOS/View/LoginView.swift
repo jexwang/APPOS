@@ -11,8 +11,8 @@ struct LoginView: View {
     @State var mail: String = ""
     @State var password: String = ""
     
+    @State var statusHUDItem: StatusHUDItem?
     @State var alertItem: AlertItem?
-    
     @State var isLoginSuccess: Bool = false
     
     var body: some View {
@@ -31,6 +31,7 @@ struct LoginView: View {
             password = "Passw0rd"
             #endif
         })
+        .statusHUD(item: $statusHUDItem)
         .alert(item: $alertItem, content: Alert.init)
         .fullScreenCover(isPresented: $isLoginSuccess, content: CompanyListView.init)
     }
@@ -39,15 +40,22 @@ struct LoginView: View {
 private extension LoginView {
     
     func login() {
+        statusHUDItem = StatusHUDItem(type: .loading, message: LocalizedString.loading)
+        
         APIManager.login(mail: mail, password: password) { (result) in
             switch result {
             case .success(let loginResult):
                 log(loginResult)
                 APIManager.setToken(loginResult.appToken)
-                isLoginSuccess = true
+                
+                statusHUDItem = StatusHUDItem(type: .success, message: LocalizedString.loginSucceed, dismissAfter: 1) {
+                    isLoginSuccess = true
+                }
             case .failure(let error):
                 log(error.localizedDescription)
                 APIManager.clearToken()
+                
+                statusHUDItem = nil
                 alertItem = AlertItem(title: Text(LocalizedString.error), message: Text(error.localizedDescription))
             }
         }

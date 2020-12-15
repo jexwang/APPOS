@@ -73,8 +73,16 @@ struct LocalizedString {
     
     
     
+    static var loading: String {
+        NSLocalizedString("Loading", comment: "")
+    }
+    
     static var login: String {
         NSLocalizedString("Login", comment: "")
+    }
+    
+    static var loginSucceed: String {
+        NSLocalizedString("LoginSucceed", comment: "")
     }
     
     

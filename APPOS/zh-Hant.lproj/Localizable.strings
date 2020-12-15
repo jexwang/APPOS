@@ -24,7 +24,9 @@
 
 "Error" = "錯誤";
 
+"Loading" = "載入中";
 "Login" = "登入";
+"LoginSucceed" = "登入成功";
 
 "Mail" = "信箱";
 

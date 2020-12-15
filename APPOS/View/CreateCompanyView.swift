@@ -21,6 +21,7 @@ struct CreateCompanyView: View {
     @State var adminPassword: String = ""
     @State var adminPhone: String = ""
     
+    @State var statusHUDItem: StatusHUDItem?
     @State var alertItem: AlertItem?
     
     var body: some View {
@@ -76,6 +77,7 @@ struct CreateCompanyView: View {
                     })
                 }
             }
+            .statusHUD(item: $statusHUDItem)
             .alert(item: $alertItem, content: Alert.init)
         }
     }
@@ -84,6 +86,8 @@ struct CreateCompanyView: View {
 private extension CreateCompanyView {
     
     func createCompany() {
+        statusHUDItem = StatusHUDItem(type: .loading, message: LocalizedString.loading)
+        
         let company = CreateCompany(
             companyUID: companyUID,
             companyName: companyName,
@@ -101,9 +105,14 @@ private extension CreateCompanyView {
             switch result {
             case .success:
                 log(company)
-                presentationMode.wrappedValue.dismiss()
+                
+                statusHUDItem = StatusHUDItem(type: .success, message: LocalizedString.loginSucceed, dismissAfter: 1) {
+                    presentationMode.wrappedValue.dismiss()
+                }
             case .failure(let error):
                 log(error.localizedDescription)
+                
+                statusHUDItem = nil
                 alertItem = AlertItem(title: Text(LocalizedString.error), message: Text(error.localizedDescription))
             }
         }
