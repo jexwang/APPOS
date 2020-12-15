@@ -37,6 +37,7 @@ struct LoginView: View {
     }
 }
 
+// MARK: - Private functions
 private extension LoginView {
     
     func login() {

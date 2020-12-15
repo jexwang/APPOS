@@ -17,12 +17,13 @@ struct CompanyListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(companyList, id: \.id) { (company) in
-                    Text(company.name)
+                ForEach(companyList) { (company) in
+                    NavigationLink(destination: Text(company.name)) {
+                        CompanyCellView(company: company)
+                    }
                 }
             }
-            .navigationTitle(LocalizedString.companyList)
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle(LocalizedString.companyList, displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -42,6 +43,7 @@ struct CompanyListView: View {
     }
 }
 
+// MARK: - Private functions
 private extension CompanyListView {
     
     func loadData() {

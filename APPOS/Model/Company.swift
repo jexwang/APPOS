@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Company: Decodable {
+// MARK: - Company
+struct Company: Decodable, Identifiable {
     let id: Int
     let uid: String
     let name: String
@@ -29,6 +30,7 @@ struct Company: Decodable {
     }
 }
 
+// MARK: - CreateCompany
 struct CreateCompany: Encodable {
     let companyUID: String
     let companyName: String
