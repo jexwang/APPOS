@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import JWStatusHUD
 
 struct LoginView: View {
     @State var mail: String = ""
     @State var password: String = ""
     
-    @State var statusHUDItem: StatusHUDItem?
+    @State var statusHUDItem: JWStatusHUDItem?
     @State var alertItem: AlertItem? {
         didSet {
             statusHUDItem = nil
@@ -45,7 +46,7 @@ struct LoginView: View {
 private extension LoginView {
     
     func login() {
-        statusHUDItem = StatusHUDItem(type: .loading, message: LocalizedString.loading)
+        statusHUDItem = JWStatusHUDItem(type: .loading, message: LocalizedString.loading)
         
         APIManager.login(mail: mail, password: password) { (result) in
             switch result {
@@ -53,7 +54,7 @@ private extension LoginView {
                 log(loginResult)
                 APIManager.setToken(loginResult.appToken)
                 
-                statusHUDItem = StatusHUDItem(type: .success, message: LocalizedString.loginSucceed, dismissAfter: 1) {
+                statusHUDItem = JWStatusHUDItem(type: .success, message: LocalizedString.loginSucceed, dismissAfter: 1) {
                     isLoginSuccess = true
                 }
             case .failure(let error):

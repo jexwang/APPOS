@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import JWStatusHUD
 
 struct CreateCompanyView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -21,7 +22,7 @@ struct CreateCompanyView: View {
     @State var adminPassword: String = ""
     @State var adminPhone: String = ""
     
-    @State var statusHUDItem: StatusHUDItem?
+    @State var statusHUDItem: JWStatusHUDItem?
     @State var alertItem: AlertItem? {
         didSet {
             statusHUDItem = nil
@@ -81,9 +82,9 @@ struct CreateCompanyView: View {
                     })
                 }
             }
-            .statusHUD(item: $statusHUDItem)
-            .alert(item: $alertItem, content: Alert.init)
         }
+        .statusHUD(item: $statusHUDItem)
+        .alert(item: $alertItem, content: Alert.init)
     }
 }
 
@@ -91,7 +92,7 @@ struct CreateCompanyView: View {
 private extension CreateCompanyView {
     
     func createCompany() {
-        statusHUDItem = StatusHUDItem(type: .loading, message: LocalizedString.loading)
+        statusHUDItem = JWStatusHUDItem(type: .loading, message: LocalizedString.loading)
         
         let company = CreateCompany(
             companyUID: companyUID,
@@ -111,7 +112,7 @@ private extension CreateCompanyView {
             case .success:
                 log(company)
                 
-                statusHUDItem = StatusHUDItem(type: .success, message: LocalizedString.createSucceed, dismissAfter: 1) {
+                statusHUDItem = JWStatusHUDItem(type: .success, message: LocalizedString.createSucceed, dismissAfter: 1) {
                     presentationMode.wrappedValue.dismiss()
                 }
             case .failure(let error):

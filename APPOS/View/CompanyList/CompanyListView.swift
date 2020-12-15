@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import JWStatusHUD
 
 struct CompanyListView: View {
     @State var companyList: [Company] = []
     
-    @State var statusHUDItem: StatusHUDItem?
+    @State var statusHUDItem: JWStatusHUDItem?
     @State var alertItem: AlertItem? {
         didSet {
             statusHUDItem = nil
@@ -49,7 +50,7 @@ struct CompanyListView: View {
 private extension CompanyListView {
     
     func loadData() {
-        statusHUDItem = StatusHUDItem(type: .loading, message: LocalizedString.loading)
+        statusHUDItem = JWStatusHUDItem(type: .loading, message: LocalizedString.loading)
         
         APIManager.getCompanies { (result) in
             switch result {
