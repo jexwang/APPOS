@@ -42,7 +42,7 @@ struct CreateCompanyView: View {
                     Button(action: {
                         viewModel.createCompany()
                     }, label: {
-                        Text(LocalizedString.done)
+                        Text(.done)
                     })
                 }
             }

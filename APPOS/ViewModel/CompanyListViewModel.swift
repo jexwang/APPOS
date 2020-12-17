@@ -26,7 +26,7 @@ class CompanyListViewModel: ObservableObject {
     private var cancellableSet: Set<AnyCancellable> = []
     
     func loadData() {
-        statusHUDItem = JWStatusHUDItem(type: .loading, message: LocalizedString.loading)
+        statusHUDItem = JWStatusHUDItem(type: .loading, message: .loading)
         
         let shareResult = APIManager.shared.getCompanies().share()
         

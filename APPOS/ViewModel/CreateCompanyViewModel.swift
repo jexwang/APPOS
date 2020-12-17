@@ -37,7 +37,7 @@ class CreateCompanyViewModel: ObservableObject {
     private var cancellableSet: Set<AnyCancellable> = []
     
     func createCompany() {
-        statusHUDItem = JWStatusHUDItem(type: .loading, message: LocalizedString.loading)
+        statusHUDItem = JWStatusHUDItem(type: .loading, message: .loading)
         
         let company = CreateCompany(
             companyUID: companyUID,
@@ -66,7 +66,7 @@ class CreateCompanyViewModel: ObservableObject {
         
         shareResult
             .map { (_) -> JWStatusHUDItem? in
-                JWStatusHUDItem(type: .success, message: LocalizedString.createSucceed, dismissAfter: 1)
+                JWStatusHUDItem(type: .success, message: .createSucceed, dismissAfter: 1)
             }
             .replaceError(with: nil)
             .receiveOnMain()

@@ -43,7 +43,7 @@ class LoginViewModel: ObservableObject {
     }
     
     func login() {
-        statusHUDItem = JWStatusHUDItem(type: .loading, message: LocalizedString.loading)
+        statusHUDItem = JWStatusHUDItem(type: .loading, message: .loading)
         
         let shareResult = APIManager.shared.login(mail: mail, password: password).share()
         
@@ -66,7 +66,7 @@ class LoginViewModel: ObservableObject {
         
         shareResult
             .map { (_) -> JWStatusHUDItem? in
-                JWStatusHUDItem(type: .success, message: LocalizedString.loginSucceed, dismissAfter: 1)
+                JWStatusHUDItem(type: .success, message: .loginSucceed, dismissAfter: 1)
             }
             .replaceError(with: nil)
             .receiveOnMain()

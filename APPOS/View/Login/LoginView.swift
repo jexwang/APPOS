@@ -16,7 +16,7 @@ struct LoginView: View {
             InputField.mail(text: $viewModel.mail)
             InputField.password(text: $viewModel.password)
             
-            Button(LocalizedString.login) {
+            Button(.login) {
                 viewModel.login()
             }
             .disabled(!viewModel.loginButtonEnabled)
