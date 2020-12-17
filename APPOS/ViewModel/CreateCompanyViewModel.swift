@@ -60,7 +60,7 @@ class CreateCompanyViewModel: ObservableObject {
                 return true
             }
             .replaceError(with: false)
-            .receiveOnMain()
+            .delay(for: 1, scheduler: DispatchQueue.main)
             .assign(to: \.createSucceeded, on: self)
             .store(in: &cancellableSet)
         
