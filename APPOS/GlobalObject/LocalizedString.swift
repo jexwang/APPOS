@@ -2,7 +2,7 @@
 //  LocalizedString.swift
 //  APPOS
 //
-//  Created by 王冠綸 on 2020/12/10.
+//  Created by Jay on 2020/12/10.
 //
 
 import Foundation

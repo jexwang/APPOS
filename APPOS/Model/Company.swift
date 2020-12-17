@@ -2,7 +2,7 @@
 //  Company.swift
 //  APPOS
 //
-//  Created by 王冠綸 on 2020/11/14.
+//  Created by Jay on 2020/11/14.
 //
 
 import Foundation

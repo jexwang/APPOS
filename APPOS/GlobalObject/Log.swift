@@ -2,7 +2,7 @@
 //  Log.swift
 //  TrueYOGA
 //
-//  Created by 王冠綸 on 2020/10/27.
+//  Created by Jay on 2020/10/27.
 //
 
 import Foundation

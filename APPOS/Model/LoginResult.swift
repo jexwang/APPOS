@@ -2,7 +2,7 @@
 //  LoginResult.swift
 //  APPOS
 //
-//  Created by 王冠綸 on 2020/11/25.
+//  Created by Jay on 2020/11/25.
 //
 
 import Foundation

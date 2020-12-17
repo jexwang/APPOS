@@ -2,7 +2,7 @@
 //  Blank.swift
 //  APPOS
 //
-//  Created by 王冠綸 on 2020/12/12.
+//  Created by Jay on 2020/12/12.
 //
 
 import Foundation

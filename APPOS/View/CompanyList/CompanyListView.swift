@@ -2,33 +2,27 @@
 //  CompanyListView.swift
 //  APPOS
 //
-//  Created by 王冠綸 on 2020/12/10.
+//  Created by Jay on 2020/12/10.
 //
 
 import SwiftUI
 import JWStatusHUD
 
 struct CompanyListView: View {
-    @State var companyList: [Company] = []
+    @ObservedObject var viewModel: CompanyListViewModel = CompanyListViewModel()
     
-    @State var statusHUDItem: JWStatusHUDItem?
-    @State var alertItem: AlertItem? {
-        didSet {
-            statusHUDItem = nil
-        }
-    }
     @State var showCreateCompanyView: Bool = false
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(companyList) { (company) in
+                ForEach(viewModel.companyList) { (company) in
                     NavigationLink(destination: Text(company.name)) {
-                        CompanyCellView(company: company)
+                        CompanyCell(company: company)
                     }
                 }
             }
-            .navigationBarTitle(LocalizedString.companyList, displayMode: .inline)
+            .navigationBarTitle(.companyList, displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -38,33 +32,12 @@ struct CompanyListView: View {
                     })
                 }
             }
-            .onAppear(perform: loadData)
+            .onAppear(perform: viewModel.loadData)
         }
-        .statusHUD(item: $statusHUDItem)
-        .alert(item: $alertItem, content: Alert.init)
+        .statusHUD(item: $viewModel.statusHUDItem)
+        .alert(item: $viewModel.alertItem, content: Alert.init)
         .sheet(isPresented: $showCreateCompanyView, content: CreateCompanyView.init)
     }
-}
-
-// MARK: - Private functions
-private extension CompanyListView {
-    
-    func loadData() {
-        statusHUDItem = JWStatusHUDItem(type: .loading, message: LocalizedString.loading)
-        
-        APIManager.getCompanies { (result) in
-            switch result {
-            case .success(let paginationResult):
-                log(paginationResult)
-                self.companyList = paginationResult.result
-                statusHUDItem = nil
-            case .failure(let error):
-                log(error.localizedDescription)
-                alertItem = AlertItem(title: Text(LocalizedString.error), message: Text(error.localizedDescription))
-            }
-        }
-    }
-    
 }
 
 struct CompanyListView_Previews: PreviewProvider {

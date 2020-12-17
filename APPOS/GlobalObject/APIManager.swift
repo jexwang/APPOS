@@ -2,52 +2,62 @@
 //  APIManager.swift
 //  APPOS
 //
-//  Created by 王冠綸 on 2020/11/4.
+//  Created by Jay on 2020/11/4.
 //
 
-import Foundation
+import SwiftUI
+import Combine
 
+// MARK: - HTTPMethod
 private enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
     case delete = "DELETE"
 }
 
+// MARK: - APIError
 enum APIError: Error {
     case networkError
     case dataFormatError
-    case noResponseData
     case backendError(message: String)
-}
-
-extension APIError: LocalizedError {
-    var localizedDescription: String {
+    case unknown(message: String)
+    
+    var localizedStringKey: LocalizedStringKey {
         switch self {
         case .networkError:
-            return "網路異常"
+            return .networkError
         case .dataFormatError:
-            return "資料格式異常"
-        case .noResponseData:
-            return "無回應資料"
+            return .dataFormatError
         case .backendError(let message):
-            return message
+            return LocalizedStringKey(message)
+        case .unknown(let message):
+            return LocalizedStringKey(message)
         }
     }
 }
 
+// MARK: - APIRequest
+typealias APIRequest<T: Decodable> = AnyPublisher<T, APIError>
+
+// MARK: - APIManager
 class APIManager {
     
-    static let url: URL = URL(string: "http://35.233.166.164/api/v1/")!
-    static private(set) var token: String?
-    static private let encoder: JSONEncoder = JSONEncoder()
-    static private let decoder: JSONDecoder = JSONDecoder()
+    static let shared: APIManager = APIManager()
+    
+    private let url: URL = URL(string: "http://35.233.166.164/api/v1/")!
+    private let encoder: JSONEncoder = JSONEncoder()
+    private let decoder: JSONDecoder = JSONDecoder()
+    
+    var token: String?
+    
+    private init() {}
     
 }
 
 // MARK: - Private functions
 private extension APIManager {
     
-    private static func sendRequest(url: URL, method: HTTPMethod, body: Data?, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+    private func createDataTaskPublisher(url: URL, method: HTTPMethod, body: Data?) -> URLSession.DataTaskPublisher {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         
@@ -60,10 +70,10 @@ private extension APIManager {
             request.httpBody = body
         }
         
-        URLSession.shared.dataTask(with: request, completionHandler: completion).resume()
+        return URLSession.shared.dataTaskPublisher(for: request)
     }
     
-    private static func standardRequest<T: Decodable>(path: String, method: HTTPMethod, queryItems: [URLQueryItem]? = nil, body: Data?, completion: @escaping (Result<T, APIError>) -> Void) {
+    private func createRequestPublisher<T: Decodable>(path: String, method: HTTPMethod, queryItems: [URLQueryItem]? = nil, body: Data?) -> APIRequest<T> {
         var urlWithPath: URL = url.appendingPathComponent(path)
         
         if let queryItems = queryItems,
@@ -72,39 +82,35 @@ private extension APIManager {
             urlWithPath = urlComponents.url ?? urlWithPath
         }
         
-        sendRequest(url: urlWithPath, method: method, body: body) { (data, response, error) in
-            DispatchQueue.main.async {
-                if let data = data {
-                    if checkHTTPStatusCodeIsSuccess(response: response) {
-                        if data.count == 0 {
-                            // 防止部分成功不回傳資料的狀況
-                            let data = "{}".data(using: .utf8)!
-                            completion(parseData(data: data))
-                        } else {
-                            completion(parseData(data: data))
-                        }
+        return createDataTaskPublisher(url: urlWithPath, method: method, body: body)
+            .tryMap { (output) -> Data in
+                if self.checkHTTPStatusCodeIsSuccess(response: output.response) {
+                    if output.data.count == 0 {
+                        return "{}".data(using: .utf8)!
                     } else {
-                        let parseResult: Result<ErrorData, APIError> = parseData(data: data)
-                        switch parseResult {
-                        case .success(let errorData):
-                            completion(.failure(.backendError(message: errorData.message)))
-                        case .failure(let error):
-                            completion(.failure(error))
-                        }
+                        return output.data
                     }
                 } else {
-                    completion(.failure(.networkError))
+                    let parseResult: Result<ErrorData, APIError> = self.parseData(data: output.data)
+                    switch parseResult {
+                    case .success(let errorData):
+                        throw APIError.backendError(message: errorData.message)
+                    case .failure(let error):
+                        throw error
+                    }
                 }
             }
-        }
+            .decode(type: T.self, decoder: decoder)
+            .mapError(toAPIError)
+            .eraseToAnyPublisher()
     }
     
-    private static func checkHTTPStatusCodeIsSuccess(response: URLResponse?) -> Bool {
+    private func checkHTTPStatusCodeIsSuccess(response: URLResponse?) -> Bool {
         guard let response = response as? HTTPURLResponse else { return false }
         return response.statusCode >= 200 && response.statusCode <= 299
     }
     
-    private static func parseData<T: Decodable>(data: Data) -> Result<T, APIError> {
+    private func parseData<T: Decodable>(data: Data) -> Result<T, APIError> {
         do {
             let parseResult = try decoder.decode(T.self, from: data)
             return .success(parseResult)
@@ -113,44 +119,50 @@ private extension APIManager {
         }
     }
     
+    private func toAPIError(_ error: Error) -> APIError {
+        switch error {
+        case is Foundation.URLError:
+            return .networkError
+        case is Swift.DecodingError:
+            return .dataFormatError
+        case let apiError as APIError:
+            return apiError
+        default:
+            return .unknown(message: error.localizedDescription)
+        }
+    }
+    
 }
 
 // MARK: - Internal functions
 extension APIManager {
     
-    static func setToken(_ token: String) {
-        self.token = token
-    }
-    
-    static func clearToken() {
-        self.token = nil
-    }
-    
-    static func login(mail: String, password: String, completion: @escaping (Result<LoginResult, APIError>) -> Void) {
+    func login(mail: String, password: String) -> APIRequest<LoginResult> {
         let body = """
         {
             "mail": "\(mail)",
             "password": "\(password)"
         }
         """.data(using: .utf8)!
-        standardRequest(path: "auth_user", method: .post, body: body, completion: completion)
+        return createRequestPublisher(path: "auth_user", method: .post, body: body)
     }
     
-    static func getCompanies(completion: @escaping (Result<PaginationResult<Company>, APIError>) -> Void) {
-        standardRequest(path: "companies", method: .get, body: nil, completion: completion)
+    func getCompanies() -> APIRequest<PaginationResult<Company>> {
+        createRequestPublisher(path: "companies", method: .get, body: nil)
     }
     
-    static func createCompany(company: CreateCompany, completion: @escaping (Result<Blank, APIError>) -> Void) {
-        do {
-            let companyData = try encoder.encode(company)
-            standardRequest(path: "companies", method: .post, body: companyData, completion: completion)
-        } catch {
-            completion(.failure(.dataFormatError))
-        }
+    func createCompany(companyData: CreateCompany) -> APIRequest<Blank> {
+        Just(companyData)
+            .encode(encoder: encoder)
+            .mapError(toAPIError)
+            .flatMap { (companyData) -> APIRequest<Blank> in
+                self.createRequestPublisher(path: "companies", method: .post, body: companyData)
+            }
+            .eraseToAnyPublisher()
     }
-    
-    static func searchCompany(id: Int, completion: @escaping (Result<Company, APIError>) -> Void) {
-        standardRequest(path: "companies/\(id)", method: .get, body: nil, completion: completion)
+
+    func searchCompany(id: Int) -> APIRequest<Company> {
+        createRequestPublisher(path: "companies/\(id)", method: .get, body: nil)
     }
     
 }

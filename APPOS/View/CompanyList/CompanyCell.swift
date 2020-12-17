@@ -1,13 +1,13 @@
 //
-//  CompanyCellView.swift
+//  CompanyCell.swift
 //  APPOS
 //
-//  Created by 王冠綸 on 2020/12/13.
+//  Created by Jay on 2020/12/13.
 //
 
 import SwiftUI
 
-struct CompanyCellView: View {
+struct CompanyCell: View {
     let company: Company
     
     var body: some View {
@@ -24,7 +24,7 @@ struct CompanyCellView: View {
     }
 }
 
-struct CompanyCellView_Previews: PreviewProvider {
+struct CompanyCell_Previews: PreviewProvider {
     static let company: Company = Company(
         id: 1, uid: "jayisa",
         name: "iOS Creator",
@@ -36,6 +36,6 @@ struct CompanyCellView_Previews: PreviewProvider {
     )
     
     static var previews: some View {
-        CompanyCellView(company: company)
+        CompanyCell(company: company)
     }
 }

@@ -2,7 +2,7 @@
 //  PaginationResult.swift
 //  APPOS
 //
-//  Created by 王冠綸 on 2020/11/26.
+//  Created by Jay on 2020/11/26.
 //
 
 import Foundation

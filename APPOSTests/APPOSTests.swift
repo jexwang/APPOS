@@ -2,7 +2,7 @@
 //  APPOSTests.swift
 //  APPOSTests
 //
-//  Created by 王冠綸 on 2020/12/6.
+//  Created by Jay on 2020/12/6.
 //
 
 import XCTest

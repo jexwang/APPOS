@@ -2,7 +2,7 @@
   Localizable.strings
   APPOS
 
-  Created by 王冠綸 on 2020/11/4.
+  Created by Jay on 2020/11/4.
   
 */
 
@@ -21,6 +21,7 @@
 "CreateCompany" = "建立公司";
 "CreateSucceed" = "建立成功";
 
+"DataFormatError" = "資料格式異常";
 "Done" = "完成";
 
 "Error" = "錯誤";
@@ -30,5 +31,7 @@
 "LoginSucceed" = "登入成功";
 
 "Mail" = "信箱";
+
+"NetworkError" = "網路異常";
 
 "Password" = "密碼";
