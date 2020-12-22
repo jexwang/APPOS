@@ -26,7 +26,7 @@ struct CompanyListView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        presentationMode.wrappedValue.dismiss()
+                        viewModel.logout()
                     }, label: {
                         Text(.logout)
                     })
@@ -42,6 +42,9 @@ struct CompanyListView: View {
             }
             .onAppear(perform: viewModel.loadData)
         }
+        .onReceive(viewModel.$logoutSucceeded, perform: {
+            if $0 { presentationMode.wrappedValue.dismiss() }
+        })
         .statusHUD(item: $viewModel.statusHUDItem)
         .alert(item: $viewModel.alertItem, content: Alert.init)
         .sheet(isPresented: $showCreateCompanyView, onDismiss: viewModel.loadData, content: CreateCompanyView.init)

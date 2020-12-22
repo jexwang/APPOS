@@ -147,6 +147,10 @@ extension APIManager {
         return createRequestPublisher(path: "auth_user", method: .post, body: body)
     }
     
+    func logout() -> APIRequest<Blank> {
+        return createRequestPublisher(path: "auth", method: .delete, body: nil)
+    }
+    
     func getCompanies() -> APIRequest<PaginationResult<Company>> {
         createRequestPublisher(path: "companies", method: .get, body: nil)
     }

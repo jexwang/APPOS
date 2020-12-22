@@ -13,6 +13,7 @@ class CompanyListViewModel: ObservableObject {
     
     // Output
     @Published var companyList: [Company] = []
+    @Published var logoutSucceeded: Bool = false
     
     @Published var statusHUDItem: JWStatusHUDItem?
     @Published var alertItem: AlertItem? {
@@ -45,6 +46,29 @@ class CompanyListViewModel: ObservableObject {
             .replaceError(with: nil)
             .receiveOnMain()
             .assign(to: \.statusHUDItem, on: self)
+            .store(in: &cancellableSet)
+        
+        shareResult
+            .map { (_) -> AlertItem? in nil }
+            .catch { (error) -> Just<AlertItem?> in
+                log(error)
+                return Just(AlertItem(title: Text(.error), message: Text(error.localizedStringKey)))
+            }
+            .receiveOnMain()
+            .assign(to: \.alertItem, on: self)
+            .store(in: &cancellableSet)
+    }
+    
+    func logout() {
+        statusHUDItem = JWStatusHUDItem(type: .loading, message: .loading)
+        
+        let shareResult = APIManager.shared.logout().share()
+        
+        shareResult
+            .map { _ in true }
+            .replaceError(with: false)
+            .receiveOnMain()
+            .assign(to: \.logoutSucceeded, on: self)
             .store(in: &cancellableSet)
         
         shareResult
