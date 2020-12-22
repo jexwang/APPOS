@@ -44,7 +44,7 @@ struct CompanyListView: View {
         }
         .statusHUD(item: $viewModel.statusHUDItem)
         .alert(item: $viewModel.alertItem, content: Alert.init)
-        .sheet(isPresented: $showCreateCompanyView, content: CreateCompanyView.init)
+        .sheet(isPresented: $showCreateCompanyView, onDismiss: viewModel.loadData, content: CreateCompanyView.init)
     }
 }
 
