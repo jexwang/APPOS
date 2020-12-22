@@ -28,7 +28,8 @@
 
 "Loading" = "載入中";
 "Login" = "登入";
-"LoginSucceed" = "登入成功";
+"LoginSucceeded" = "登入成功";
+"Logout" = "登出";
 
 "Mail" = "信箱";
 

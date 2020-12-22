@@ -66,7 +66,7 @@ class LoginViewModel: ObservableObject {
         
         shareResult
             .map { (_) -> JWStatusHUDItem? in
-                JWStatusHUDItem(type: .success, message: .loginSucceed, dismissAfter: 1)
+                JWStatusHUDItem(type: .success, message: .loginSucceeded, dismissAfter: 1)
             }
             .replaceError(with: nil)
             .receiveOnMain()

@@ -9,21 +9,29 @@ import SwiftUI
 import JWStatusHUD
 
 struct CompanyListView: View {
-    @ObservedObject var viewModel: CompanyListViewModel = CompanyListViewModel()
+    @Environment(\.presentationMode) var presentationMode
+    
+    @StateObject var viewModel: CompanyListViewModel = CompanyListViewModel()
     
     @State var showCreateCompanyView: Bool = false
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(viewModel.companyList) { (company) in
-                    NavigationLink(destination: Text(company.name)) {
-                        CompanyCell(company: company)
-                    }
+            List(viewModel.companyList) { (company) in
+                NavigationLink(destination: Text(company.name)) {
+                    CompanyCell(company: company)
                 }
             }
             .navigationBarTitle(.companyList, displayMode: .inline)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Text(.logout)
+                    })
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         showCreateCompanyView = true

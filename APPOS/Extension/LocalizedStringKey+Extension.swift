@@ -31,7 +31,8 @@ extension LocalizedStringKey {
     
     static var loading: LocalizedStringKey { "Loading" }
     static var login: LocalizedStringKey { "Login" }
-    static var loginSucceed: LocalizedStringKey { "LoginSucceed" }
+    static var loginSucceeded: LocalizedStringKey { "LoginSucceeded" }
+    static var logout: LocalizedStringKey { "Logout" }
     
     static var mail: LocalizedStringKey { "Mail" }
     

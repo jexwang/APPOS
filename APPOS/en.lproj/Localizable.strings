@@ -28,7 +28,8 @@
 
 "Loading" = "Loading";
 "Login" = "Login";
-"LoginSucceed" = "Login Succeed";
+"LoginSucceeded" = "Login Succeeded";
+"Logout" = "Logout";
 
 "Mail" = "Mail";
 
