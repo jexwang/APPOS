@@ -26,7 +26,8 @@ struct CompanyCell: View {
 
 struct CompanyCell_Previews: PreviewProvider {
     static let company: Company = Company(
-        id: 1, uid: "jayisa",
+        id: 1,
+        uid: "jayisa",
         name: "iOS Creator",
         address: "台中市太平區立功路130號",
         phone: "0926623688",

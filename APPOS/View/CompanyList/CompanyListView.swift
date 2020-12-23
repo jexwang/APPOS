@@ -18,7 +18,7 @@ struct CompanyListView: View {
     var body: some View {
         NavigationView {
             List(viewModel.companyList) { (company) in
-                NavigationLink(destination: Text(company.name)) {
+                NavigationLink(destination: CompanyView(company: company)) {
                     CompanyCell(company: company)
                 }
             }
