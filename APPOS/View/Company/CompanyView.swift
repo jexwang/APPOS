@@ -10,7 +10,7 @@ import SwiftUI
 struct CompanyView: View {
     let company: Company
     
-    @State var showEditCompanyView: Bool = false
+    @State private var showEditCompanyView: Bool = false
     
     var body: some View {
         HStack {

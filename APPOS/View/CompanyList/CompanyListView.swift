@@ -9,11 +9,11 @@ import SwiftUI
 import JWStatusHUD
 
 struct CompanyListView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     
-    @StateObject var viewModel: CompanyListViewModel = CompanyListViewModel()
+    @StateObject private var viewModel: CompanyListViewModel = CompanyListViewModel()
     
-    @State var showCreateCompanyView: Bool = false
+    @State private var showCreateCompanyView: Bool = false
     
     var body: some View {
         NavigationView {

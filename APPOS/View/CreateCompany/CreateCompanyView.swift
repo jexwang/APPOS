@@ -9,9 +9,9 @@ import SwiftUI
 import JWStatusHUD
 
 struct CreateCompanyView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     
-    @ObservedObject var viewModel: CreateCompanyViewModel = CreateCompanyViewModel()
+    @ObservedObject private var viewModel: CreateCompanyViewModel = CreateCompanyViewModel()
     
     var body: some View {
         NavigationView {
