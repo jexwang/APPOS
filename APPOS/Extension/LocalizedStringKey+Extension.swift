@@ -22,7 +22,7 @@ extension LocalizedStringKey {
     static var companyPhone: LocalizedStringKey { "CompanyPhone" }
     static var companyUID: LocalizedStringKey { "CompanyUID" }
     static var createCompany: LocalizedStringKey { "CreateCompany" }
-    static var createSucceed: LocalizedStringKey { "CreateSucceed" }
+    static var createSucceeded: LocalizedStringKey { "CreateSucceeded" }
     
     static var dataFormatError: LocalizedStringKey { "DataFormatError" }
     static var done: LocalizedStringKey { "Done" }
@@ -39,5 +39,8 @@ extension LocalizedStringKey {
     static var networkError: LocalizedStringKey { "NetworkError" }
     
     static var password: LocalizedStringKey { "Password" }
+    
+    static var updateCompanyInformation: LocalizedStringKey { "UpdateCompanyInformation" }
+    static var updateSucceeded: LocalizedStringKey { "UpdateSucceeded" }
     
 }

@@ -45,9 +45,9 @@ class LoginViewModel: ObservableObject {
     func login() {
         statusHUDItem = JWStatusHUDItem(type: .loading, message: .loading)
         
-        let shareResult = APIManager.shared.login(mail: mail, password: password).share()
+        let sharedRequest = APIManager.shared.login(mail: mail, password: password).share()
         
-        shareResult
+        sharedRequest
             .map { (result) -> String? in
                 log(result)
                 return result.appToken
@@ -57,14 +57,14 @@ class LoginViewModel: ObservableObject {
             .assign(to: \.token, on: APIManager.shared)
             .store(in: &cancellableSet)
         
-        shareResult
+        sharedRequest
             .map { _ in true }
             .replaceError(with: false)
             .delay(for: 1, scheduler: DispatchQueue.main)
             .assign(to: \.loginSucceeded, on: self)
             .store(in: &cancellableSet)
         
-        shareResult
+        sharedRequest
             .map { (_) -> JWStatusHUDItem? in
                 JWStatusHUDItem(type: .success, message: .loginSucceeded, dismissAfter: 1)
             }
@@ -73,7 +73,7 @@ class LoginViewModel: ObservableObject {
             .assign(to: \.statusHUDItem, on: self)
             .store(in: &cancellableSet)
         
-        shareResult
+        sharedRequest
             .map { (_) -> AlertItem? in nil }
             .catch { (error) -> Just<AlertItem?> in
                 log(error)

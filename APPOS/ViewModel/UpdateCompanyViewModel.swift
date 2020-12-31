@@ -1,30 +1,25 @@
 //
-//  CreateCompanyViewModel.swift
+//  UpdateCompanyViewModel.swift
 //  APPOS
 //
-//  Created by Jay on 2020/12/17.
+//  Created by Jay on 2020/12/23.
 //
 
 import SwiftUI
 import Combine
 import JWStatusHUD
 
-class CreateCompanyViewModel: ObservableObject {
+class UpdateCompanyViewModel: ObservableObject {
     
     // input
-    @Published var companyUID: String = ""
     @Published var companyName: String = ""
     @Published var companyAddress: String = ""
     @Published var companyOwner: String = ""
     @Published var companyMail: String = ""
     @Published var companyPhone: String = ""
-    @Published var adminName: String = ""
-    @Published var adminMail: String = ""
-    @Published var adminPassword: String = ""
-    @Published var adminPhone: String = ""
     
     // Output
-    @Published var createSucceeded: Bool = false
+    @Published var updateSucceeded: Bool = false
     
     @Published var statusHUDItem: JWStatusHUDItem?
     @Published var alertItem: AlertItem? {
@@ -37,24 +32,19 @@ class CreateCompanyViewModel: ObservableObject {
     
     private var cancellableSet: Set<AnyCancellable> = []
     
-    func createCompany() {
+    func updateCompany(id companyID: Int) {
         statusHUDItem = JWStatusHUDItem(type: .loading, message: .loading)
         
-        let company = CreateCompany(
-            companyUID: companyUID,
-            companyName: companyName,
-            companyAddress: companyAddress,
-            companyOwner: companyOwner,
-            companyMail: companyMail,
-            companyPhone: companyPhone,
-            adminName: adminName,
-            adminMail: adminMail,
-            adminPassword: adminPassword,
-            adminPhone: adminPhone
+        let company = UpdateCompany(
+            name: companyName,
+            address: companyAddress,
+            owner: companyOwner,
+            mail: companyMail,
+            phone: companyPhone
         )
-        
-        let sharedRequest = APIManager.shared.createCompany(companyData: company).share()
-        
+
+        let sharedRequest = APIManager.shared.updateCompany(id: companyID, companyData: company).share()
+
         sharedRequest
             .map { (_) in
                 log(company)
@@ -62,18 +52,18 @@ class CreateCompanyViewModel: ObservableObject {
             }
             .replaceError(with: false)
             .delay(for: 1, scheduler: DispatchQueue.main)
-            .assign(to: \.createSucceeded, on: self)
+            .assign(to: \.updateSucceeded, on: self)
             .store(in: &cancellableSet)
-        
+
         sharedRequest
             .map { (_) -> JWStatusHUDItem? in
-                JWStatusHUDItem(type: .success, message: .createSucceeded, dismissAfter: 1)
+                JWStatusHUDItem(type: .success, message: .updateSucceeded, dismissAfter: 1)
             }
             .replaceError(with: nil)
             .receiveOnMain()
             .assign(to: \.statusHUDItem, on: self)
             .store(in: &cancellableSet)
-        
+
         sharedRequest
             .map { (_) -> AlertItem? in nil }
             .catch { (error) -> Just<AlertItem?> in
@@ -86,3 +76,4 @@ class CreateCompanyViewModel: ObservableObject {
     }
     
 }
+

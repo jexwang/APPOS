@@ -19,7 +19,7 @@
 "CompanyPhone" = "公司聯絡電話";
 "CompanyUID" = "公司識別碼";
 "CreateCompany" = "建立公司";
-"CreateSucceed" = "建立成功";
+"CreateSucceeded" = "建立成功";
 
 "DataFormatError" = "資料格式異常";
 "Done" = "完成";
@@ -36,3 +36,6 @@
 "NetworkError" = "網路異常";
 
 "Password" = "密碼";
+
+"UpdateCompanyInformation" = "更新公司資訊";
+"UpdateSucceeded" = "更新成功";

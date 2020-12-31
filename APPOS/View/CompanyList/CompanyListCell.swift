@@ -1,5 +1,5 @@
 //
-//  CompanyCell.swift
+//  CompanyListCell.swift
 //  APPOS
 //
 //  Created by Jay on 2020/12/13.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CompanyCell: View {
+struct CompanyListCell: View {
     let company: Company
     
     var body: some View {
@@ -37,6 +37,6 @@ struct CompanyCell_Previews: PreviewProvider {
     )
     
     static var previews: some View {
-        CompanyCell(company: company)
+        CompanyListCell(company: company)
     }
 }

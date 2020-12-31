@@ -56,3 +56,20 @@ struct CreateCompany: Encodable {
         case adminPhone = "admin_phone"
     }
 }
+
+// MARK: - UpdateCompany
+struct UpdateCompany: Encodable {
+    let name: String?
+    let address: String?
+    let owner: String?
+    let mail: String?
+    let phone: String?
+    
+    init(name: String, address: String, owner: String, mail: String, phone: String) {
+        self.name = name == "" ? nil : name
+        self.address = address == "" ? nil : address
+        self.owner = owner == "" ? nil : owner
+        self.mail = mail == "" ? nil : mail
+        self.phone = phone == "" ? nil : phone
+    }
+}

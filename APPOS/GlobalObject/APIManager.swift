@@ -13,6 +13,7 @@ private enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
     case delete = "DELETE"
+    case patch = "PATCH"
 }
 
 // MARK: - APIError
@@ -65,7 +66,7 @@ private extension APIManager {
             request.addValue(token, forHTTPHeaderField: "app_token")
         }
         
-        if method == .post {
+        if let body = body {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = body
         }
@@ -159,14 +160,20 @@ extension APIManager {
         Just(companyData)
             .encode(encoder: encoder)
             .mapError(toAPIError)
-            .flatMap { (companyData) -> APIRequest<Blank> in
-                self.createRequestPublisher(path: "companies", method: .post, body: companyData)
-            }
+            .flatMap { self.createRequestPublisher(path: "companies", method: .post, body: $0) }
             .eraseToAnyPublisher()
     }
 
-    func searchCompany(id: Int) -> APIRequest<Company> {
-        createRequestPublisher(path: "companies/\(id)", method: .get, body: nil)
+    func getCompany(by companyID: Int) -> APIRequest<Company> {
+        createRequestPublisher(path: "companies/\(companyID)", method: .get, body: nil)
+    }
+    
+    func updateCompany(id companyID: Int, companyData: UpdateCompany) -> APIRequest<Blank> {
+        Just(companyData)
+            .encode(encoder: encoder)
+            .mapError(toAPIError)
+            .flatMap { self.createRequestPublisher(path: "companies/\(companyID)", method: .patch, body: $0) }
+            .eraseToAnyPublisher()
     }
     
 }

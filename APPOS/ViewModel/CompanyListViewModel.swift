@@ -29,9 +29,9 @@ class CompanyListViewModel: ObservableObject {
     func loadData() {
         statusHUDItem = JWStatusHUDItem(type: .loading, message: .loading)
         
-        let shareResult = APIManager.shared.getCompanies().share()
+        let sharedRequest = APIManager.shared.getCompanies().share()
         
-        shareResult
+        sharedRequest
             .map {
                 log($0)
                 return $0.result
@@ -41,14 +41,14 @@ class CompanyListViewModel: ObservableObject {
             .assign(to: \.companyList, on: self)
             .store(in: &cancellableSet)
         
-        shareResult
+        sharedRequest
             .map { (_) -> JWStatusHUDItem? in nil }
             .replaceError(with: nil)
             .receiveOnMain()
             .assign(to: \.statusHUDItem, on: self)
             .store(in: &cancellableSet)
         
-        shareResult
+        sharedRequest
             .map { (_) -> AlertItem? in nil }
             .catch { (error) -> Just<AlertItem?> in
                 log(error)
@@ -62,16 +62,16 @@ class CompanyListViewModel: ObservableObject {
     func logout() {
         statusHUDItem = JWStatusHUDItem(type: .loading, message: .loading)
         
-        let shareResult = APIManager.shared.logout().share()
+        let sharedRequest = APIManager.shared.logout().share()
         
-        shareResult
+        sharedRequest
             .map { _ in true }
             .replaceError(with: false)
             .receiveOnMain()
             .assign(to: \.logoutSucceeded, on: self)
             .store(in: &cancellableSet)
         
-        shareResult
+        sharedRequest
             .map { (_) -> AlertItem? in nil }
             .catch { (error) -> Just<AlertItem?> in
                 log(error)

@@ -28,6 +28,7 @@ struct InputField: View {
                     TextField(title, text: $text)
                 }
             }
+            
             Divider()
         }
     }

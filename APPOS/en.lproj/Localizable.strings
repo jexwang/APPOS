@@ -19,7 +19,7 @@
 "CompanyPhone" = "Compnay Phone";
 "CompanyUID" = "Company UID";
 "CreateCompany" = "Create Company";
-"CreateSucceed" = "Create succeed";
+"CreateSucceeded" = "Create succeeded";
 
 "DataFormatError" = "Data format error";
 "Done" = "Done";
@@ -36,3 +36,6 @@
 "NetworkError" = "Network error";
 
 "Password" = "Password";
+
+"UpdateCompanyInformation" = "Update Company Information";
+"UpdateSucceeded" = "UPdate succeeded";

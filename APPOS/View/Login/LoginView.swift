@@ -9,17 +9,15 @@ import SwiftUI
 import JWStatusHUD
 
 struct LoginView: View {
-    @ObservedObject private var viewModel: LoginViewModel = LoginViewModel()
+    @StateObject private var viewModel: LoginViewModel = LoginViewModel()
     
     var body: some View {
         VStack(spacing: 16) {
             InputField.mail(text: $viewModel.mail)
             InputField.password(text: $viewModel.password)
             
-            Button(.login) {
-                viewModel.login()
-            }
-            .disabled(!viewModel.loginButtonEnabled)
+            Button(.login, action: viewModel.login)
+                .disabled(!viewModel.loginButtonEnabled)
         }
         .padding()
         .statusHUD(item: $viewModel.statusHUDItem)

@@ -19,15 +19,13 @@ struct CompanyListView: View {
         NavigationView {
             List(viewModel.companyList) { (company) in
                 NavigationLink(destination: CompanyView(company: company)) {
-                    CompanyCell(company: company)
+                    CompanyListCell(company: company)
                 }
             }
             .navigationBarTitle(.companyList, displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        viewModel.logout()
-                    }, label: {
+                    Button(action: viewModel.logout, label: {
                         Text(.logout)
                     })
                 }
@@ -41,13 +39,15 @@ struct CompanyListView: View {
                 }
             }
             .onAppear(perform: viewModel.loadData)
+            .onReceive(viewModel.$logoutSucceeded) {
+                if $0 { presentationMode.wrappedValue.dismiss() }
+            }
+            .statusHUD(item: $viewModel.statusHUDItem)
+            .alert(item: $viewModel.alertItem, content: Alert.init)
+            .sheet(isPresented: $showCreateCompanyView,
+                   onDismiss: viewModel.loadData,
+                   content: CreateCompanyView.init)
         }
-        .onReceive(viewModel.$logoutSucceeded, perform: {
-            if $0 { presentationMode.wrappedValue.dismiss() }
-        })
-        .statusHUD(item: $viewModel.statusHUDItem)
-        .alert(item: $viewModel.alertItem, content: Alert.init)
-        .sheet(isPresented: $showCreateCompanyView, onDismiss: viewModel.loadData, content: CreateCompanyView.init)
     }
 }
 
