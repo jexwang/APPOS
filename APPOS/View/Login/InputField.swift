@@ -45,6 +45,10 @@ extension InputField {
         InputField(imageSystemName: "lock", title: .password, text: text, isSecureTextEntry: true)
     }
     
+    static func uid(text: Binding<String>) -> InputField {
+        InputField(imageSystemName: "person", title: "UID", text: text, isSecureTextEntry: false)
+    }
+    
 }
 
 struct InputField_Previews: PreviewProvider {

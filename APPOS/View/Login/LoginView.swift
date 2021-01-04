@@ -12,12 +12,30 @@ struct LoginView: View {
     @StateObject private var viewModel: LoginViewModel = LoginViewModel()
     
     var body: some View {
-        VStack(spacing: 16) {
-            InputField.mail(text: $viewModel.mail)
-            InputField.password(text: $viewModel.password)
+        VStack(spacing: 40) {
+            Spacer()
+                .frame(maxHeight: 120)
+            
+            Picker("Roles", selection: $viewModel.roles) {
+                ForEach(LoginRoles.allCases, id: \.self) {
+                    Text($0.localizedString)
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            
+            VStack(spacing: 16) {
+                InputField.mail(text: $viewModel.mail)
+                
+                InputField.password(text: $viewModel.password)
+                
+                InputField.uid(text: $viewModel.uid)
+                    .visible(viewModel.uidInputFieldVisible)
+            }
             
             Button(.login, action: viewModel.login)
                 .disabled(!viewModel.loginButtonEnabled)
+            
+            Spacer()
         }
         .padding()
         .statusHUD(item: $viewModel.statusHUDItem)

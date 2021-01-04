@@ -40,6 +40,7 @@
 		69CFA3782592F7B200F1B3D2 /* UpdateCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CFA3772592F7B100F1B3D2 /* UpdateCompanyView.swift */; };
 		69CFA38025931E5500F1B3D2 /* UpdateCompanyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CFA37F25931E5500F1B3D2 /* UpdateCompanyViewModel.swift */; };
 		69CFA38E25933EDC00F1B3D2 /* CompanyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CFA38D25933EDC00F1B3D2 /* CompanyViewModel.swift */; };
+		69D396FE25A2ED1B009CC6B6 /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D396FD25A2ED1B009CC6B6 /* Defines.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		69CFA3772592F7B100F1B3D2 /* UpdateCompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCompanyView.swift; sourceTree = "<group>"; };
 		69CFA37F25931E5500F1B3D2 /* UpdateCompanyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCompanyViewModel.swift; sourceTree = "<group>"; };
 		69CFA38D25933EDC00F1B3D2 /* CompanyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewModel.swift; sourceTree = "<group>"; };
+		69D396FD25A2ED1B009CC6B6 /* Defines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				6954BF73257CD0470014C5C3 /* APIManager.swift */,
+				69D396FD25A2ED1B009CC6B6 /* Defines.swift */,
 				6954BFB725826DBA0014C5C3 /* Log.swift */,
 			);
 			path = GlobalObject;
@@ -435,6 +438,7 @@
 				697FBC67258B31E500154119 /* CompanyListViewModel.swift in Sources */,
 				6954BFB025826BB60014C5C3 /* InputField.swift in Sources */,
 				69A2B5412584661E00485FBE /* Blank.swift in Sources */,
+				69D396FE25A2ED1B009CC6B6 /* Defines.swift in Sources */,
 				6954BFB825826DBA0014C5C3 /* Log.swift in Sources */,
 				6954BF7D257CD05E0014C5C3 /* LoginResult.swift in Sources */,
 				6954BFA3257CD5E60014C5C3 /* AlertItem.swift in Sources */,

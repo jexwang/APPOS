@@ -14,6 +14,7 @@ extension LocalizedStringKey {
     static var adminPassword: LocalizedStringKey { "AdminPassword" }
     static var adminPhone: LocalizedStringKey { "AdminPhone" }
     
+    static var company: LocalizedStringKey { "Company" }
     static var companyAddress: LocalizedStringKey { "CompanyAddress" }
     static var companyList: LocalizedStringKey { "CompanyList" }
     static var companyMail: LocalizedStringKey { "CompanyMail" }
@@ -42,5 +43,6 @@ extension LocalizedStringKey {
     
     static var updateCompanyInformation: LocalizedStringKey { "UpdateCompanyInformation" }
     static var updateSucceeded: LocalizedStringKey { "UpdateSucceeded" }
+    static var user: LocalizedStringKey { "User" }
     
 }

@@ -11,6 +11,7 @@
 "AdminPassword" = "管理員密碼";
 "AdminPhone" = "管理員聯絡電話";
 
+"Company" = "公司";
 "CompanyAddress" = "公司地址";
 "CompanyList" = "公司列表";
 "CompanyMail" = "公司信箱";
@@ -39,3 +40,4 @@
 
 "UpdateCompanyInformation" = "更新公司資訊";
 "UpdateSucceeded" = "更新成功";
+"User" = "使用者";

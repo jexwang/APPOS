@@ -13,4 +13,14 @@ extension View {
         AnyView(self)
     }
     
+    func visible(_ visible: Bool) -> some View {
+        if visible {
+            return self
+                .eraseToAnyView()
+        } else {
+            return EmptyView()
+                .eraseToAnyView()
+        }
+    }
+    
 }

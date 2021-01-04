@@ -95,7 +95,7 @@ private extension APIManager {
                     let parseResult: Result<ErrorData, APIError> = self.parseData(data: output.data)
                     switch parseResult {
                     case .success(let errorData):
-                        throw APIError.backendError(message: errorData.message)
+                        throw APIError.backendError(message: "\(errorData.message)(\(errorData.code))")
                     case .failure(let error):
                         throw error
                     }
@@ -138,7 +138,7 @@ private extension APIManager {
 // MARK: - Internal functions
 extension APIManager {
     
-    func login(mail: String, password: String) -> APIRequest<LoginResult> {
+    func userLogin(mail: String, password: String) -> APIRequest<UserLoginResult> {
         let body = """
         {
             "mail": "\(mail)",
@@ -146,6 +146,17 @@ extension APIManager {
         }
         """.data(using: .utf8)!
         return createRequestPublisher(path: "auth_user", method: .post, body: body)
+    }
+    
+    func companyLogin(mail: String, password: String, uid: String) -> APIRequest<CompanyLoginResult> {
+        let body = """
+        {
+            "mail": "\(mail)",
+            "password": "\(password)",
+            "uid": "\(uid)"
+        }
+        """.data(using: .utf8)!
+        return createRequestPublisher(path: "auth_company", method: .post, body: body)
     }
     
     func logout() -> APIRequest<Blank> {

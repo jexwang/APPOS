@@ -11,6 +11,7 @@
 "AdminPassword" = "Admin Password";
 "AdminPhone" = "Admin Phone";
 
+"Company" = "Company";
 "CompanyAddress" = "Company Address";
 "CompanyList" = "Company List";
 "CompanyMail" = "Company mail";
@@ -39,3 +40,4 @@
 
 "UpdateCompanyInformation" = "Update Company Information";
 "UpdateSucceeded" = "UPdate succeeded";
+"User" = "User";
