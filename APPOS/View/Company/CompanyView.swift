@@ -37,12 +37,12 @@ struct CompanyView: View {
                 })
             }
         }
-        .sheet(isPresented: $showUpdateCompanyView,
-               onDismiss: { viewModel.getCompany(by: company.id) },
-               content: { UpdateCompanyView(company: viewModel.company ?? company) })
         .onAppear(perform: { viewModel.getCompany(by: company.id) })
         .statusHUD(item: $viewModel.statusHUDItem)
         .alert(item: $viewModel.alertItem, content: Alert.init)
+        .sheet(isPresented: $showUpdateCompanyView,
+               onDismiss: { viewModel.getCompany(by: company.id) },
+               content: { UpdateCompanyView(company: viewModel.company ?? company) })
     }
 }
 

@@ -45,9 +45,9 @@ struct UpdateCompanyView: View {
             .onReceive(viewModel.$updateSucceeded) {
                 if $0 { presentationMode.wrappedValue.dismiss() }
             }
+            .statusHUD(item: $viewModel.statusHUDItem)
+            .alert(item: $viewModel.alertItem, content: Alert.init)
         }
-        .statusHUD(item: $viewModel.statusHUDItem)
-        .alert(item: $viewModel.alertItem, content: Alert.init)
     }
 }
 
